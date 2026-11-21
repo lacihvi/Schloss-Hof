@@ -1,0 +1,348 @@
+﻿<krpano version="1.20.9" title="Virtual Tour">
+
+<include url="%VIEWER%/plugins/combobox.xml"/>
+<include url="skin/marker_upraveny.xml" />
+<include url="skin/vtourskin.xml" />
+<include url="skin/vtourskin_design_ultra_light.xml" />
+<include url="%VIEWER%/plugins/showtext.xml" />
+
+<!-- ligntbox  -->
+	<include url="plugin-easy-html-lightbox-parameter.xml" />
+	<include url="tooltip.xml" />
+	<include url="infopoints.xml" />   
+	<events onmousedown="close_sidebar();" />
+	
+	
+
+<!-- ŠTARTOVACIA AKCIA: Spracuje parameter startscene z URL (či už pošlete číslo 12, 15 alebo text). Ak parameter chýba, načíta index 0 -->
+<action name="startup" autoplay="true" autorun="onstart">
+    if(startscene !== null,
+        if(scene[get(startscene)] !== null,
+            copy(target_start_scene, scene[get(startscene)].name);
+        ,
+            copy(target_start_scene, scene[get(startscene)].name);
+        );
+    ,
+        copy(target_start_scene, scene[0].name);
+    );
+    loadscene(get(target_start_scene), null, MERGE);
+</action>
+
+<!-- Globálna udalosť: Kedykoľvek sa zmení scéna odkiaľkoľvek, posunie vizuálne aj položku v menu -->
+<events name="cb_scene_sync" keep="true" 
+        onnewpano="if(layer[cbscenes], layer[cbscenes].selectItemByName(get(xml.scene)); );" 
+        />
+
+<!-- ZMENA: Úplne sme vymazali 'onchange'. Menu už pri zrode nespustí žiadnu chybu null -->
+<combobox name="cbscenes" 
+          design="vtour" 
+          align="leftbottom" 
+          x="10" 
+          y="10" 
+          onloaded="add_scene_items();" 
+          />
+
+<!-- Táto akcia bezpečne naplní menu a akciu na kliknutie priradí priamo ku každému riadku zvlášť -->
+<action name="add_scene_items" scope="local">
+    for(set(i,0), i LT scene.count, inc(i), 
+        <!-- Vytvoríme čistý text príkazu pre konkrétnu scénu -->
+        set(click_action, calc('loadscene(' + scene[get(i)].name + ', null, MERGE);'));
+        
+        <!-- Pridáme položku pomocou addNamedItem, kde ID je meno scény a tretí parameter je akcia na kliknutie -->
+        caller.addNamedItem(
+            calc(scene[get(i)].name), 
+            calc('[img src=[dq]' + scene[get(i)].thumburl + '[dq] style=[dq]border:1px solid rgba(255,255,255,0.5);width:48px;height:32px;vertical-align:middle;margin-right:8px;[dq]/] '+scene[get(i)].title),
+            get(click_action)
+        ); 
+    );
+    
+    <!-- Vizuálne nastavíme označený riadok podľa aktuálne načítanej panorámy -->
+    caller.selectItemByName(get(xml.scene));
+</action>
+
+
+<!-- some custom example designs -->
+<combobox_design name="rounded" margin="3" open_close_speed="0.25">
+<style name="combobox_container_style" bgcolor="0xFFFFFF" bgalpha="0.95" bgborder="1 0xFFFFFF 0.5" bgroundedge="5" bgshadow="2 4 20 0x000000 0.5"/>
+<style name="combobox_marker_style" css="color:#999999;" bg="false" txtshadow=""/>
+<style name="combobox_item_style" css="color:#222222;" padding="4 4" bg="false" bgcolor="0xCCCCCC" bgalpha="1.0" bgroundedge="3" txtshadow="" onoveritem="set(css, 'color:#2277FF;');" onoutitem="set(css, 'color:#222222;');"/>
+</combobox_design>
+<combobox_design name="classic" margin="0" open_close_speed="0.25">
+<style name="combobox_container_style" bgcolor="0xFFFFFF" bgalpha="1.0" bgborder="2 0x333333 0.5" bgroundedge="0" bgshadow="" height="50"/>
+<style name="combobox_marker_style" css="color:#222222;" bg="false" txtshadow=""/>
+<style name="combobox_item_style" css="color:#222222;" padding="7" bg="false" bgcolor="0x777777" bgalpha="1.0" bgroundedge="0" txtshadow="" onoveritem="set(bg,true); set(css, 'color:#FFFFFF;');" onoutitem="set(bg,false); set(css, 'color:#222222;');"/>
+</combobox_design>
+<combobox_design name="glas" margin="2" open_close_speed="0.25">
+<style name="combobox_container_style" bgcolor="0xEEEEEE" bgalpha="0.5" bgborder="1 0x333333 0.5" bgroundedge="5" bgshadow="0 4 10 0x000000 0.3" height="50"/>
+<style name="combobox_marker_style" css="color:#222222;" alpha="0.7" bg="false" txtshadow=""/>
+<style name="combobox_item_style" css="color:#222222;" padding="4" bg="false" bgborder="1 0x333333 0.0" bgcolor="0xFFFFFF" bgalpha="1" bgroundedge="3" txtshadow="0 0 4 0xFFFFFF 1" onoveritem="set(bg,true); set(bgborder, '1 0x333333 0.5');" onoutitem="set(bg,false); set(bgborder, '1 0x333333 0.0');"/>
+</combobox_design>
+
+<events onclick="if(device.fullscreensupport, set(fullscreen, true); ); "  />
+  
+<autorotate enabled="true" waittime="2.0" accel="0.7" speed="4.0" tofov="80" oneroundrange="360" />
+
+
+  <style name="LAYER_STYLE6"
+           type="text"
+           align="center"
+           edge="center"
+           bg="false"
+           border="false"
+           css="font-family:Arial; text-align:center; font-size:30px; font-weight:bold; font-style:italic; color:#000000; text-shadow:0px 0px 1px #FFFFFF, 0px 0px 2px #FFFFFF, 0px 0px 3px #FFFFFF, 0px 0px 4px #FFFFFF, 2px 2px 4px #000000, 3px 3px 8px #000000;"
+           />
+
+
+
+	
+	
+	
+	<textstyle name="STYLE6"
+	           font="Arial" fontsize="20" bold="true" italic="true"
+	           background="false" border="false"
+	           textcolor="0x000000"
+	           css="text-shadow:0px 0px 1px #FFFFFF, 0px 0px 2px #FFFFFF, 0px 0px 3px #FFFFFF, 0px 0px 4px #FFFFFF, 2px 2px 4px #000000, 3px 3px 8px #000000;"
+	           origin="cursor"
+			   textalign="center"
+	           edge="topleft"
+	           xoffset="25"
+	           yoffset="25"
+	           />
+			   
+	<!-- Nastavenie úvodného obrázka (Intro Image)
+<layer name="introimage" 
+       url="skin/intro3.png" 
+	   scale="0.4"
+       keep="true" 
+       align="center" 
+       width="prop" 
+       height="100%" 
+       zorder="100"
+       enabled="true"
+       visible="true"
+       onclick="intro_start();"
+       />
+
+	    -->
+	<action name="intro_start">
+    <!-- 1. Fullscreen a zapnutie rotácie -->
+    set(fullscreen, true);
+    set(autorotate.enabled, true);
+    set(autorotate.speed, -6.0); 
+	
+
+    <!-- 2. Zmena smeru po 10 sekundách (z 6.0 na -6.0) -->
+    delayedcall(change_dir_timer, 10.0, 
+        tween(autorotate.speed, 3.0, 2.0); 
+    );
+
+    <!-- 3. Odstránenie úvodného obrázka 
+    tween(layer[introimage].alpha, 0.0, 0.5, default, 
+        set(layer[introimage].visible, false);
+        removelayer(introimage);
+    ); -->
+</action>
+	
+	<scene name="scene_fontana1" title="Schloss Hof vstupné nádvorie" onstart="" thumburl="panos/fontana1.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="43.315" vlookat="-2.698" fovtype="MFOV" fov="73.653" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/fontana1.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" progressive="false">
+			<level tiledimagewidth="3183" tiledimageheight="3183">
+				<cube url="panos/fontana1.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1536" tiledimageheight="1536">
+				<cube url="panos/fontana1.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/fontana1.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+			<mobile>
+				<cube url="panos/fontana1.tiles/mobile_%s.jpg" />
+			</mobile>
+		</image>
+
+		<!-- place your scene hotspots here -->
+		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();" style="skin_hotspotstyle2" ath="44.782" atv="4.371" linkedscene="scene_hof"  />	
+		
+			<!-- lightbox /> -->
+		
+	<layer name="INFO" style="skin_infopunkt|tooltip"
+			url="more-info.png" 
+			scale="0.4"
+			align="righttop" x="80" y="20"  tooltip="INFO"		
+			onhover="showtext(INFO, STYLE6);"		
+			onclick="frame_sidebar('info.html');" />	
+		
+	<!--	
+	<hotspot name="spot2" url="skin/vtourskin_hotspot_green.png" style="skin_hotspotstyle2" ath="-10" atv="8.691" linkedscene="scene_3" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();" />
+	
+	<layer name="Galery" style="skin_infopunkt_67|tooltip" align="lefttop" x="20" y="20" url="menu.png" width="50" height="50"  tooltip="FOTO GALEGY" 
+		
+		onhover="showtext(Foto Gallery, STYLE6);"
+		
+		onclick="frame_image_gallery	('img/Výhlad na Tatry.jpeg;');" />			
+
+	 lightbox /> -->
+	
+	<!-- Použitie v layeri pre moj text --> 
+	<layer name="moj_text" 
+		   style="LAYER_STYLE6" 
+		   html="Schloss Hof[font size='3'] [br]Neptunová fontana[/font]" 
+		   x="0" y="-5" 
+		   />
+		   
+	</scene>
+	
+	<scene name="scene_hof" title="Schloss Hof nádvorie" onstart="" thumburl="panos/hof.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="183.288" vlookat="-5.403" fovtype="MFOV" fov="84.059" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/hof.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" progressive="false">
+			<level tiledimagewidth="3183" tiledimageheight="3183">
+				<cube url="panos/hof.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1536" tiledimageheight="1536">
+				<cube url="panos/hof.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/hof.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+			<mobile>
+				<cube url="panos/hof.tiles/mobile_%s.jpg" />
+			</mobile>
+		</image>
+
+		<!-- place your scene hotspots here -->
+		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-177.114" atv="-0.252" linkedscene="scene_altanok"  />
+		<hotspot name="spot2" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-1.990" atv="-2.787" linkedscene="scene_fontana1"  />
+
+	</scene>
+
+	
+	<scene name="scene_altanok" title="Slávnostná sála" onstart="" thumburl="panos/altanok.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="-189.597" vlookat="-0.288" fovtype="MFOV" fov="78.651" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/altanok.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" progressive="false">
+			<level tiledimagewidth="3183" tiledimageheight="3183">
+				<cube url="panos/altanok.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1536" tiledimageheight="1536">
+				<cube url="panos/altanok.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/altanok.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+			<mobile>
+				<cube url="panos/altanok.tiles/mobile_%s.jpg" />
+			</mobile>
+		</image>
+
+		<!-- place your scene hotspots here -->
+		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-101.505" atv="2.718" linkedscene="scene_bager"  />
+		<hotspot name="spot2" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="81.931" atv="-0.181" linkedscene="scene_hof" />
+
+	</scene>
+
+	<scene name="scene_bager" title="Schlosshof záhrada" onstart="" thumburl="panos/bager.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="-39.082" vlookat="-1.348" fovtype="MFOV" fov="72.182" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/bager.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" progressive="false">
+			<level tiledimagewidth="3183" tiledimageheight="3183">
+				<cube url="panos/bager.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1536" tiledimageheight="1536">
+				<cube url="panos/bager.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/bager.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+			<mobile>
+				<cube url="panos/bager.tiles/mobile_%s.jpg" />
+			</mobile>
+		</image>
+
+		<!-- place your scene hotspots here -->
+		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="140.522" atv="6.443" linkedscene="scene_fontana2"  />
+		<hotspot name="spot2" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-42.083" atv="-1.998" linkedscene="scene_altanok"  />
+		
+
+	</scene>
+
+	
+
+	
+
+	<scene name="scene_fontana2" title="Malá kaskáda" onstart="" thumburl="panos/fontana2.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="-96.541" vlookat="3.384" fovtype="MFOV" fov="92.120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/fontana2.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" progressive="false">
+			<level tiledimagewidth="3183" tiledimageheight="3183">
+				<cube url="panos/fontana2.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1536" tiledimageheight="1536">
+				<cube url="panos/fontana2.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/fontana2.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+			<mobile>
+				<cube url="panos/fontana2.tiles/mobile_%s.jpg" />
+			</mobile>
+		</image>
+
+		<!-- place your scene hotspots here -->
+		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-78.151" atv="-8.221" linkedscene="scene_bager"  />
+		<hotspot name="spot2" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="91.113" atv="3.168" linkedscene="scene_fontana" />
+
+	</scene>
+	
+	
+	
+	<scene name="scene_fontana" title="Oktagonová fontána" onstart="" thumburl="panos/fontana.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="-142.048" vlookat="-5.768" fovtype="MFOV" fov="84.404" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/fontana.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" progressive="false">
+			<level tiledimagewidth="7462" tiledimageheight="7462">
+				<cube url="panos/fontana.tiles/%s/l5/%v/l5_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="3731" tiledimageheight="3731">
+				<cube url="panos/fontana.tiles/%s/l4/%v/l4_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1866" tiledimageheight="1866">
+				<cube url="panos/fontana.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="933" tiledimageheight="933">
+				<cube url="panos/fontana.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="512" tiledimageheight="512">
+				<cube url="panos/fontana.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+			<mobile>
+				<cube url="panos/fontana.tiles/mobile_%s.jpg" />
+			</mobile>
+		</image>
+
+		<!-- place your scene hotspots here -->
+		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-139.623" atv="-0.827" linkedscene="scene_fontana2"  />
+
+	</scene>
+
+
+</krpano>

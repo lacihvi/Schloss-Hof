@@ -1,0 +1,31 @@
+
+<krpano>
+
+
+
+	
+	<style name="skin_infopunkt" edge="center" scale="0.4" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 1.0, 0.2);" onout="mouse-alpha-on(); tween(scale, 0.4, 0.2);" zorder="10"  distorted="false" devices="desktop" />
+	
+	<style name="skin_infopunkt" edge="center" scale="0.75" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 1.0, 0.2);" onout="mouse-alpha-on(); tween(scale, 0.75, 0.2);"  zorder="10"  distorted="false" devices="tablet" />
+	<style name="skin_infopunkt" edge="center" scale="0.5"  zorder="10"  distorted="false" devices="mobile" />
+	
+	<style name="skin_infopunkt_100" edge="center" scale="1.00" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 1.2, 0.2);" onout="mouse-alpha-on(); tween(scale, 1.00, 0.2);"  zorder="10"  distorted="false" devices="desktop" />
+	<style name="skin_infopunkt_100" edge="center" scale="1.00" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 1.2, 0.2);" onout="mouse-alpha-on(); tween(scale, 1.00, 0.2);"  zorder="10"  distorted="false" devices="tablet" />
+	<style name="skin_infopunkt_100" edge="center" scale="0.75" zorder="10"  distorted="false" devices="mobile" />
+
+	<style name="skin_infopunkt_75" edge="center" scale="0.75" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 1.0, 0.2);" onout="mouse-alpha-on(); tween(scale, 0.75, 0.2);"  zorder="10"  distorted="false" devices="desktop" />
+	<style name="skin_infopunkt_75" edge="center" scale="0.75" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 1.0, 0.2);" onout="mouse-alpha-on(); tween(scale, 0.75, 0.2);"  zorder="10"  distorted="false" devices="tablet" />
+	<style name="skin_infopunkt_75" edge="center" scale="0.4"  zorder="10"  distorted="false" devices="mobile" />
+	
+	<style name="skin_infopunkt_67" edge="center" scale="0.67" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 0.8, 0.2);" onout="mouse-alpha-on(); tween(scale, 0.67, 0.2);"  zorder="10"  distorted="false" devices="desktop" />
+	<style name="skin_infopunkt_67" edge="center" scale="0.67" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 0.8, 0.2);" onout="mouse-alpha-on(); tween(scale, 0.67, 0.2);"  zorder="10"  distorted="false" devices="tablet" />
+	<style name="skin_infopunkt_67" edge="center" scale="0.5"  zorder="10"  distorted="false" devices="mobile" />
+	
+	<style name="skin_infopunkt_50" edge="center" scale="0.50" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 0.6, 0.2);" onout="mouse-alpha-on(); tween(scale, 0.50, 0.2);"  zorder="10"  distorted="false" devices="desktop" />
+	<style name="skin_infopunkt_50" edge="center" scale="0.50" onover="mouse-alpha-off();" onhover="mouse-alpha-off(); tween(scale, 0.6, 0.2);" onout="mouse-alpha-on(); tween(scale, 0.50, 0.2);"  zorder="10"  distorted="false" devices="tablet" />
+	<style name="skin_infopunkt_50" edge="center" scale="0.2"  zorder="10"  distorted="false" devices="mobile" />
+
+
+
+
+</krpano>

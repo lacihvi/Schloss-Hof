@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baroková záhrada a záhradná fasáda - Zámok Schloss Hof</title>
+    <style>
+        html, body {
+            background: #141414 !important;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px;
+            color: #FFFFFF !important;
+            position: relative;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .lang-flag {
+            width: 30px;
+            height: 20px;
+            opacity: 0.4;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        /* ČISTÉ CSS PREPÍNANIE BEZ JAVASCRIPTU */
+        #lang-sk { display: block; }
+        #en { display: none; }
+        #flag-sk .lang-flag { opacity: 1; outline: 2px solid #E5A93C; }
+        
+        html:has(#en:target) #lang-sk { display: none; }
+        html:has(#en:target) #en { display: block; }
+        html:has(#en:target) #flag-sk .lang-flag { opacity: 0.4; outline: none; }
+        html:has(#en:target) #flag-en .lang-flag { opacity: 1; outline: 2px solid #E5A93C; }
+
+        .container {
+            max-width: 680px;
+            margin: 35px auto auto auto;
+            background: rgba(0, 0, 0, 0.4) !important;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            text-align: justify;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            color: #E5A93C !important;
+            text-align: center;
+            margin: 0 0 5px 0;
+        }
+        h2 {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        .highlight {
+            color: #E5A93C;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <a href="#" id="flag-sk" title="Slovensky">
+            <img src="img/64.png" alt="SK flag" class="lang-flag">
+        </a>
+        <a href="#en" id="flag-en" title="English">
+            <img src="img/65.png" alt="EN flag" class="lang-flag">
+        </a>
+    </div>
+
+    <div class="container">
+        
+        <!-- SLOVENSKÁ VERZIA -->
+        <div id="lang-sk">
+            <h1>Baroková záhrada a záhradná fasáda</h1>
+            <h2>Zámok Schloss Hof</h2>
+            
+            <p>Nachádzate sa na najvyššej z celkovo <span class="highlight">siedmich stupňovitých terás</span> veľkolepej barokovej záhrady, odkiaľ sa otvára ikonický pohľad na východnú záhradnú fasádu zámku Schloss Hof. Celý záhradný koncept navrhli dvorní záhradní architekti <span class="highlight">Anton Zinner a Dominique Girard</span> v duchu vrcholného baroka ako oslavu víťazstva ľudského umenia a geometrického poriadku nad divokou prírodou.</p>
+            
+            <p>Dominantou tejto hornej terasy je monumentálna <span class="highlight">fontána s mytologickým súsoším</span>, okolo ktorej sa symetricky rozprestierajú precízne tvarované kvetinové partery a kužeľovito strihané tisy. Vodu do fontán privádzal dômyselný barokový vodovodný systém z niekoľko kilometrov vzdialených prameňov, čo bolo v 18. storočí považované za technický zázrak.</p>
+            
+            <p>Pohľad späť na palác odhaľuje jeho reprezentatívnu východnú fasádu zakončenú kamennou <span class="highlight">balustrádou</span> a štítom s latinským nápisom oslavujúcim cisársku prestavbu za vlády Márie Terézie. Priamo z prízemia paláca sem ústia dvere zo sály <span class="highlight">Sala Terrena</span>, čím sa plynulo prepája intímny svet zámockých komnát s otvorenou scenériou záhrad.</p>
+        </div>
+
+        <!-- ANGLICKÁ VERZIA -->
+        <div id="en">
+            <h1>Baroque Garden and Garden Facade</h1>
+            <h2>Schloss Hof Palace</h2>
+            
+            <p>You are standing on the highest of the <span class="highlight">seven cascading terraces</span> of the magnificent Baroque garden, which offers an iconic view of the eastern garden facade of Schloss Hof Palace. The entire garden layout was conceived by court garden architects <span class="highlight">Anton Zinner and Dominique Girard</span> in the spirit of the High Baroque as a celebration of human artistry and geometric order triumphing over untamed nature.</p>
+            
+            <p>The centerpiece of this upper terrace is a monumental <span class="highlight">fountain adorned with a mythological sculpture group</span>, surrounded symmetrically by intricately patterned flower parterres and conically trimmed yews. Water was supplied to the fountains through an ingenious Baroque aqueduct system fed by springs several kilometers away—a feat regarded as an engineering marvel in the 18th century.</p>
+            
+            <p>Looking back toward the palace reveals its stately eastern facade, bordered by a stone <span class="highlight">balustrade</span> and crowned by a pediment bearing a Latin inscription commemorating Empress Maria Theresa's imperial remodeling. The doors of the <span class="highlight">Sala Terrena</span> open directly onto this terrace, seamlessly uniting the intimate world of the palace interiors with the grand open scenery of the gardens.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

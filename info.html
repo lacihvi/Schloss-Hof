@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zámok Schloss Hof - Dolné Rakúsko</title>
+    <style>
+        html, body {
+            background: #141414 !important;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px;
+            color: #FFFFFF !important;
+            position: relative;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .lang-flag {
+            width: 30px;
+            height: 20px;
+            opacity: 0.4;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        /* ČISTÉ CSS PREPÍNANIE BEZ JAVASCRIPTU */
+        #lang-sk { display: block; }
+        #en { display: none; }
+        #flag-sk .lang-flag { opacity: 1; outline: 2px solid #E5A93C; }
+        
+        html:has(#en:target) #lang-sk { display: none; }
+        html:has(#en:target) #en { display: block; }
+        html:has(#en:target) #flag-sk .lang-flag { opacity: 0.4; outline: none; }
+        html:has(#en:target) #flag-en .lang-flag { opacity: 1; outline: 2px solid #E5A93C; }
+
+        .container {
+            max-width: 680px;
+            margin: 35px auto auto auto;
+            background: rgba(0, 0, 0, 0.4) !important;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            text-align: justify;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            color: #E5A93C !important;
+            text-align: center;
+            margin: 0 0 5px 0;
+        }
+        h2 {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        .highlight {
+            color: #E5A93C;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <a href="#" id="flag-sk" title="Slovensky">
+            <img src="img/64.png" alt="SK flag" class="lang-flag">
+        </a>
+        <a href="#en" id="flag-en" title="English">
+            <img src="img/65.png" alt="EN flag" class="lang-flag">
+        </a>
+    </div>
+
+    <div class="container">
+        
+        <!-- SLOVENSKÁ VERZIA -->
+        <div id="lang-sk">
+            <h1>Zámok Schloss Hof</h1>
+            <h2>Dolné Rakúsko</h2>
+            
+            <p>Rozľahlý barokový <span class="highlight">Zámok Schloss Hof</span>, ležiaci v bezprostrednej blízkosti slovenských hraníc, predstavuje najväčší vidiecky zámocký komplex v Rakúsku. Svoju veľkolepú podobu získal v roku 1725, keď ho kúpil slávny vojvodca <span class="highlight">princ Eugen Savojský</span>. Pod vedením dvorného architekta Johanna Lucasa von Hildebrandta tu vzniklo reprezentatívne poľovnícke a vidiecke sídlo, ktoré svojou nádherou konkurovalo samotným cisárskym palácom.</p>
+            
+            <p>V roku 1755 areál odkúpila cisárovná <span class="highlight">Mária Terézia</span>, ktorá ho nechala prebudovať do dnešnej klasicisticko-barokovej podoby a využívala ho ako miesto oddychu pre cisársku rodinu. Prechádzka po slávnostnom čestnom nádvorí s fontánou či pohľad na prepychové komnaty dodnes dýchajú atmosférou habsburskej monarchie a aristokratického života 18. storočia.</p>
+            
+            <p>Jedinečnosť celého viac ako 70-hektárového areálu dotvárajú veľkolepé <span class="highlight">sedemterasové barokové záhrady</span>, ktoré sa stupňovito zvažujú smerom k rieke Morave. Zdobia ich bohato tvarované kvetinové záhony, mytologické súsošia a monumentálne fontány, pričom celok harmonicky dopĺňa idylický historický hospodársky dvor s oranžériami a vzácnymi plemenami zvierat.</p>
+        </div>
+
+        <!-- ANGLICKÁ VERZIA -->
+        <div id="en">
+            <h1>Schloss Hof Palace</h1>
+            <h2>Lower Austria</h2>
+            
+            <p>The expansive Baroque <span class="highlight">Schloss Hof Palace</span>, located right near the Slovak border, is the largest country palace complex in Austria. It acquired its magnificent appearance in 1725 when it was purchased by the famous military commander <span class="highlight">Prince Eugene of Savoy</span>. Under the direction of court architect Johann Lucas von Hildebrandt, a grand hunting and country residence was created here, rivaling the imperial palaces themselves in splendor.</p>
+            
+            <p>In 1755, the estate was acquired by Empress <span class="highlight">Maria Theresa</span>, who had it remodeled into its present Classicist-Baroque form and used it as a peaceful retreat for the imperial family. A stroll through the ceremonial courtyard of honor with its fountain, or a glimpse into the opulent state apartments, still breathes the atmosphere of the Habsburg monarchy and 18th-century aristocratic life.</p>
+            
+            <p>The uniqueness of the entire 70-hectare estate is completed by the spectacular <span class="highlight">seven-terraced Baroque gardens</span> sloping gently down toward the Morava River. They are adorned with intricately designed flowerbeds, mythological sculptures, and monumental fountains, harmoniously complemented by an idyllic historic estate farm with orangeries and rare breeds of domestic animals.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+
+<krpano>
+
+	<plugin name="easy_html_lightbox" 
+        url="lightbox.js" 
+        keep="true"
+        devices="html5"
+        include_jquery="true" 
+        include_lightbox="true" 
+        theme="dark" 
+        background_color="#1e1e1e" 
+        />   
+		   
+
+	<layer name="sidebar" status="close" type="text" zorder="101" bgcolor="0xFFFFFF" bgalpha="0.8" align="righttop" x="-600" y="0" width="80%" maxwidth="600" height="100%" keep="true" bgcapture2="false" handcursor2="false"></layer>
+
+
+	<action name="open_sidebar">
+        set(layer[sidebar].status,open);
+		tween(layer[sidebar].x,0 ,0.5);
+    </action>
+
+	<action name="close_sidebar">
+        set(layer[sidebar].status,close);
+		tween(layer[sidebar].x,-600 ,0.5);
+		plugin[easy_html_lightbox].open_url('blank.html','','','','','layer[sidebar]');
+    </action>
+
+	
+	<style name="skin_infopunkt" ondown="close_sidebar();" />
+	<style name="skin_hotspotstyle2" ondown="close_sidebar();" />
+	<style name="skin_hotspotstyle5" ondown="close_sidebar();" />
+
+
+
+	<action name="frame_sidebar">
+	if(device.mobile !== true,
+	plugin[easy_html_lightbox].open_url(%1,'','','','','layer[sidebar]'); open_sidebar();
+	,
+	plugin[easy_html_lightbox].open_url(%1,80%,80%);
+	);
+	</action>
+	
+	<action name="frame_image_gallery">
+    plugin[easy_html_lightbox].open_zoomable_image();
+	</action>
+	
+	<action name="frame_small">plugin[easy_html_lightbox].open_url(%1,600,80%);</action>
+	<action name="frame_full">plugin[easy_html_lightbox].open_url(%1,80%,80%);</action>
+	<action name="frame_new">openurl(%1,_blank);</action>
+	<action name="frame_image">plugin[easy_html_lightbox].open_image(%1,'','','',true);</action>
+	<action name="frame_image_title">plugin[easy_html_lightbox]'', '%1'.open_image(%1,'','',%2,true);</action>
+	<action name="frame_youtube">plugin[easy_html_lightbox].play_video('https://www.youtube.com/watch?v=%1',1280,720);</action>
+	<action name="frame_vimeo">plugin[easy_html_lightbox].play_video('https://vimeo.com/%1',1280,720);</action>
+	<action name="frame_mp4">plugin[easy_html_lightbox].play_video(%1,1280,720);</action>
+	
+	<action name="frame_image_gallery">plugin[easy_html_lightbox].open_zoomable_image('', '%1');</action>
+	
+	
+	
+	
+	
+
+
+
+</krpano>

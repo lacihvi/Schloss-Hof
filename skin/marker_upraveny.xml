@@ -1,0 +1,157 @@
+<krpano>
+
+	<!-- Hlavny styl ikony hotspotu -->
+	<style name="skin_hotspotstyle2"
+		   zorder="40"
+		   flying="0.0"
+		   scale.normal="0.5"
+		   scale.mobile="0.33"
+		   alpha="0.9"
+		   onover="hotspot2_onover();"
+		   onout="hotspot2_onout();"
+		   onclick="hotspot2_onclick();"
+		   />
+
+	<!-- Styl nahladoveho obrazka (vyrez 240x160 z thumb.jpg) -->
+	<style name="skin_hotspotstyle2_img"
+		   crop="0|40|240|160"
+		   scale="0.3"
+		   alpha="0.0"
+		   zorder="999999"
+		   enabled="false"
+		   />
+
+	<!-- Styl pozadia a popisu pod nahladom -->
+	<style name="skin_hotspotstyle2_tag"
+		   type="text"
+		   alpha="0.0"
+		   zorder="999998"
+		   enabled="false"
+		   width="260"
+		   height="200"
+		   vcenter="true"
+		   padding="170 10 10 10"
+		   bg="true"
+		   bgcolor="0x2D3E50"
+		   bgalpha="0.5"
+		   bgroundedge="4"
+		   bgshadow="0 4 10 0x000000 0.4"
+		   css="h1 { font-family: Arial, sans-serif; font-size: 12px; line-height: 15px; color: #FFFFFF; margin: 0; font-weight: bold; text-align: center; }"
+		   />
+
+	<!-- Pri kazdom nacitani sceny: odomkni klikanie a vygeneruj nahlady -->
+	<events name="skin_hotspotstyle2_events" keep="true"
+			onnewscene="set(global.hs_busy, false); generate_circle_hotspots_images();"
+			/>
+
+	<!-- Vytvorenie nahladovych obrazkov a popiskov pre vsetky hotspoty so stylom skin_hotspotstyle2 (PC aj mobil) -->
+	<action name="generate_circle_hotspots_images" scope="local">
+		for(set(h,0), h LT hotspot.count, inc(h),
+			if(hotspot[get(h)].style == 'skin_hotspotstyle2',
+
+				<!-- 1. Vytvorenie nahladoveho obrazka -->
+				txtadd(hs_img, get(hotspot[get(h)].name), '_img');
+				addhotspot(get(hs_img), temp_hs, 'css3d');
+				hotspot[get(hs_img)].loadstyle(skin_hotspotstyle2_img);
+				copy(hotspot[get(hs_img)].ath, hotspot[get(h)].ath);
+				copy(hotspot[get(hs_img)].atv, hotspot[get(h)].atv);
+
+				if(scene[get(hotspot[get(h)].linkedscene)].thumburl,
+					copy(hotspot[get(hs_img)].url, scene[get(hotspot[get(h)].linkedscene)].thumburl);
+				);
+
+				<!-- 2. Vytvorenie textoveho stitku (ramecek pod obrazkom) -->
+				txtadd(hs_tag, get(hotspot[get(h)].name), '_tag');
+				addhotspot(get(hs_tag), temp_hs2, 'css3d');
+				hotspot[get(hs_tag)].loadstyle(skin_hotspotstyle2_tag);
+				copy(hotspot[get(hs_tag)].ath, hotspot[get(h)].ath);
+				copy(hotspot[get(hs_tag)].atv, hotspot[get(h)].atv);
+
+				<!-- Nastavenie textu z atributu title cielovej sceny -->
+				if(scene[get(hotspot[get(h)].linkedscene)].title,
+					txtadd(hotspot[get(hs_tag)].html, '[h1]', get(scene[get(hotspot[get(h)].linkedscene)].title), '[/h1]');
+				  ,
+					txtadd(hotspot[get(hs_tag)].html, '[h1]', get(hotspot[get(h)].linkedscene), '[/h1]');
+				);
+
+				<!-- Zarovnanie podla ukotvenia (edge) hotspotu -->
+				update_marker_preview_offset(get(hotspot[get(h)].name));
+			);
+		);
+	</action>
+
+	<!-- Presne zarovnanie obrazka a popisu -->
+	<action name="update_marker_preview_offset" scope="localonly" args="name">
+		<!-- Obrazok: pevna poloha nad hotspotom -->
+		set(global.hotspot[calc(name + '_img')].ox, 0);
+		set(global.hotspot[calc(name + '_img')].oy, -158);
+
+		<!-- Ramec: ukotveny zhora, aby 1- alebo 2-riadkovy text
+		     nemenil hornu hranu ramceka -->
+		set(global.hotspot[calc(name + '_tag')].ox, 0);
+		set(global.hotspot[calc(name + '_tag')].oy, -148);
+	</action>
+
+	<!-- Zobrazenie nahladu (PC: hover, mobil: pri kliknuti) -->
+	<action name="hotspot2_onover">
+		if(global.hs_busy != true,
+			set(zorder, 999997);
+			tween(alpha, 1.0, 0.2);
+
+			txtadd(hs_tag, get(name), '_tag');
+			tween(hotspot[get(hs_tag)].alpha, 1.0, 0.3);
+
+			txtadd(hs_img, get(name), '_img');
+			tween(hotspot[get(hs_img)].scale, 1.0, 0.3, easeoutcubic);
+			tween(hotspot[get(hs_img)].alpha, 1.0, 0.3, easeoutcubic);
+		);
+	</action>
+
+	<!-- Skrytie nahladu (neskryje sa, ak prave caka prechod na mobile) -->
+	<action name="hotspot2_onout">
+		if(global.hs_busy != true,
+			set(zorder, 40);
+			tween(alpha, 0.9, 0.2);
+
+			txtadd(hs_tag, get(name), '_tag');
+			tween(hotspot[get(hs_tag)].alpha, 0.0, 0.3);
+
+			txtadd(hs_img, get(name), '_img');
+			tween(hotspot[get(hs_img)].scale, 0.3, 0.3, easeoutcubic);
+			tween(hotspot[get(hs_img)].alpha, 0.0, 0.3, easeoutcubic);
+		);
+	</action>
+
+	<!-- Kliknutie na hotspot -->
+	<action name="hotspot2_onclick">
+		if(linkedscene,
+			if(device.handheld,
+
+				<!-- MOBIL: ukaz nahlad, po 2 s prejdi na scenu -->
+				if(global.hs_busy != true,
+					hotspot2_onover();
+					set(global.hs_busy, true);
+					copy(global.next_scene, linkedscene);
+					copy(global.hs_name, name);
+					delayedcall(mobile_preview_dc, 2.0, hotspot2_go_mobile(); );
+				);
+
+			  ,
+
+				<!-- PC: povodne spravanie -->
+				hotspot2_onout();
+				tween(scale, 0.1, 0.25);
+				tween(alpha, 0.0, 0.25);
+				looktohotspot(get(name), 70, smooth(80,20,100));
+				loadscene(get(linkedscene), null, MERGE, BLEND(1));
+			);
+		);
+	</action>
+
+	<!-- Prechod na dalsiu scenu na mobile (vola sa po 2 s) -->
+	<action name="hotspot2_go_mobile">
+		looktohotspot(get(hs_name), 70, smooth(80,20,100));
+		loadscene(get(next_scene), null, MERGE, BLEND(1));
+	</action>
+
+</krpano>

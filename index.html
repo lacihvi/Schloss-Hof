@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Schloss Hof</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta http-equiv="x-ua-compatible" content="IE=edge" />
+	
+	<meta property="og:title" content=" Pozrite si vidiecký zámok Schloss Hof cez virtuálnu prehliadku." /> 
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://lacihvi-schlosshof.netlify.app/index.html" />
+	<meta property="og:image" content="https://lacihvi-schlosshof.netlify.app/ico.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="675" />	
+	<meta property="og:description" content="Virtuálna prehliadka "/>
+	
+	<style>
+		html { height:100%; }
+		body { height:100%; overflow:hidden; margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#FFFFFF; background-color:#000000; }
+	
+		
+	</style>
+</head>
+<body>
+
+
+
+<script src="tour.js"></script>
+
+<!-- Hlavná panoráma -->
+<div id="pano" style="width:100%;height:100%;">
+	<noscript><table style="width:100%;height:100%;"><tr style="vertical-align:middle;text-align:center;"><td>ERROR:<br><br>Javascript not activated<br><br></td></tr></table></noscript>
+	<script>
+		embedpano({swf:"tour.swf", xml:"tour_box.xml", target:"pano", html5:"auto", mobilescale:1.0, passQueryParameters:true});
+	</script>
+</div>
+
+</div>
+
+
+
+</body>
+</html>

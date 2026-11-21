@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Čestné nádvorie (Cour d'honneur) - Zámok Schloss Hof</title>
+    <style>
+        html, body {
+            background: #141414 !important;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px;
+            color: #FFFFFF !important;
+            position: relative;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .lang-flag {
+            width: 30px;
+            height: 20px;
+            opacity: 0.4;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        /* ČISTÉ CSS PREPÍNANIE BEZ JAVASCRIPTU */
+        #lang-sk { display: block; }
+        #en { display: none; }
+        #flag-sk .lang-flag { opacity: 1; outline: 2px solid #E5A93C; }
+        
+        html:has(#en:target) #lang-sk { display: none; }
+        html:has(#en:target) #en { display: block; }
+        html:has(#en:target) #flag-sk .lang-flag { opacity: 0.4; outline: none; }
+        html:has(#en:target) #flag-en .lang-flag { opacity: 1; outline: 2px solid #E5A93C; }
+
+        .container {
+            max-width: 680px;
+            margin: 35px auto auto auto;
+            background: rgba(0, 0, 0, 0.4) !important;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            text-align: justify;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            color: #E5A93C !important;
+            text-align: center;
+            margin: 0 0 5px 0;
+        }
+        h2 {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        .highlight {
+            color: #E5A93C;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <a href="#" id="flag-sk" title="Slovensky">
+            <img src="img/64.png" alt="SK flag" class="lang-flag">
+        </a>
+        <a href="#en" id="flag-en" title="English">
+            <img src="img/65.png" alt="EN flag" class="lang-flag">
+        </a>
+    </div>
+
+    <div class="container">
+        
+        <!-- SLOVENSKÁ VERZIA -->
+        <div id="lang-sk">
+            <h1>Čestné nádvorie (Cour d'honneur)</h1>
+            <h2>Zámok Schloss Hof</h2>
+            
+            <p>Nachádzate sa v samom architektonickom srdci paláca, na monumentálnom <span class="highlight">Čestnom nádvorí</span>, ktoré z troch strán obklopujú reprezentatívne krídla zámku. Tento veľkolepý otvorený priestor v tvare písmena U navrhol slávny architekt <span class="highlight">Johann Lucas von Hildebrandt</span> tak, aby okamžite ohúril každého vzácneho hosťa prichádzajúceho kočom na dvor princa Eugena Savojského.</p>
+            
+            <p>Fasády v typickej cisárskej <span class="highlight">tereziánskej žltej farbe</span> doplnené bielymi štukovými prvkami získali svoju harmonickú trojpodlažnú podobu počas veľkej prestavby za vlády Márie Terézie v 70. rokoch 18. storočia. Panovníčka nechala palác zvýšiť o jedno poschodie, aby vytvorila dostatok priestoru pre svoj početný cisársky sprievod, dvorné dámy a vysokú šľachtu.</p>
+            
+            <p>Pohľadu dominuje stredový rizalit hlavného krídla s charakteristickými <span class="highlight">zámockými hodinami</span>, barokovými sochami na atike a slávnostným vstupným portálom. Práve tadiaľto vchádzali najvýznamnejší hostia do honosného schodiska a ďalej do prepychových reprezentačných sál i cisárskych apartmánov.</p>
+        </div>
+
+        <!-- ANGLICKÁ VERZIA -->
+        <div id="en">
+            <h1>Courtyard of Honor (Cour d'honneur)</h1>
+            <h2>Schloss Hof Palace</h2>
+            
+            <p>You are standing in the very architectural heart of the palace, in the monumental <span class="highlight">Courtyard of Honor</span>, enclosed on three sides by the grand residential wings. This impressive U-shaped open space was designed by the renowned architect <span class="highlight">Johann Lucas von Hildebrandt</span> to immediately awe every distinguished guest arriving by carriage at the court of Prince Eugene of Savoy.</p>
+            
+            <p>The facades, painted in the iconic imperial <span class="highlight">Maria Theresa yellow</span> and accented with white stucco details, acquired their harmonious three-story appearance during the major remodeling under Empress Maria Theresa in the 1770s. The monarch had an extra floor added to the palace to provide ample accommodation for her large imperial entourage, ladies-in-waiting, and high nobility.</p>
+            
+            <p>The view is dominated by the central projection of the main wing, crowned with the characteristic <span class="highlight">palace clock</span>, Baroque statues along the attic, and the ceremonial entrance portal. Through these very doors, the most prominent visitors entered the grand staircase leading to the opulent state rooms and imperial apartments.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

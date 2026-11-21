@@ -1,0 +1,112 @@
+<!-- zadaniehotspotu 
+<hotspot name="spot1" 
+         style="skin_hotspotstyle2" 
+         url="skin/ikona.png" 
+         edge="bottom" 
+         ath="75.974" 
+         atv="3.182" 
+         linkedscene="scene_poracska" />
+-->
+
+<!-- Štýl hlavnej ikony hotspotu (ekvivalent skin_hotspotstyle2) -->
+<style name="skin_hotspotstyle2"
+       zorder="40"
+       flying="0.0"
+       scale.normal="0.5"
+       scale.mobile="0.33"
+       alpha="0.85"
+       onloaded="setup_preview_hotspot();"
+       onover="hotspot2_onover();"
+       onout="hotspot2_onout();"
+       onclick="hotspot2_onclick();"
+       />
+
+<!-- Štýl náhľadového obrázka nad hotspotom -->
+<style name="skin_hotspotstyle2_img"
+       crop="0|40|240|160"
+       scale="0.5"
+       alpha="0.0"
+       zorder="99"
+       enabled="false"
+       edge="bottom"
+       oy="-35"
+       />
+
+<!-- Štýl textového štítku pod náhľadom -->
+<style name="skin_hotspotstyle2_tag"
+       type="text"
+       alpha="0.0"
+       zorder="98"
+       enabled="false"
+       edge="bottom"
+       oy="-35"
+       width="120"
+       padding="84 6 6 6"
+       bg="true"
+       bgcolor="0x2D3E50"
+       bgalpha="0.9"
+       bgroundedge="4"
+       css="color:#FFFFFF; font-family:Arial, sans-serif; font-size:12px; text-align:center;"
+       />
+
+<!-- Akcia, ktorá automaticky vytvorí náhľad a text pre každý hotspot s týmto štýlom -->
+<action name="setup_preview_hotspot" scope="local">
+    if(caller.linkedscene,
+        <!-- Vytvorenie názvov pre pomocné hotspoty -->
+        txtadd(img_name, get(caller.name), '_img');
+        txtadd(tag_name, get(caller.name), '_tag');
+
+        <!-- 1. Vytvorenie textového pozadia a titulku -->
+        addhotspot(get(tag_name));
+        hotspot[get(tag_name)].loadstyle(skin_hotspotstyle2_tag);
+        copy(hotspot[get(tag_name)].ath, caller.ath);
+        copy(hotspot[get(tag_name)].atv, caller.atv);
+        copy(hotspot[get(tag_name)].html, scene[get(caller.linkedscene)].title);
+
+        <!-- 2. Vytvorenie náhľadového obrázka zo scény (thumburl) -->
+        addhotspot(get(img_name));
+        hotspot[get(img_name)].loadstyle(skin_hotspotstyle2_img);
+        copy(hotspot[get(img_name)].ath, caller.ath);
+        copy(hotspot[get(img_name)].atv, caller.atv);
+        copy(hotspot[get(img_name)].url, scene[get(caller.linkedscene)].thumburl);
+    );
+</action>
+
+<!-- Efekt pri prejdení myšou (zväčšenie ikony + zobrazenie náhľadu) -->
+<action name="hotspot2_onover" scope="local">
+    set(caller.zorder, 50);
+    tween(caller.alpha, 1.0, 0.2);
+    if(device.mobile, tween(caller.scale, 0.42, 0.2); , tween(caller.scale, 0.65, 0.2); );
+
+    txtadd(img_name, get(caller.name), '_img');
+    txtadd(tag_name, get(caller.name), '_tag');
+    if(hotspot[get(img_name)],
+        tween(hotspot[get(img_name)].alpha, 1.0, 0.2);
+        tween(hotspot[get(tag_name)].alpha, 1.0, 0.2);
+    );
+</action>
+
+<!-- Efekt pri odchode myši -->
+<action name="hotspot2_onout" scope="local">
+    set(caller.zorder, 40);
+    tween(caller.alpha, 0.85, 0.2);
+    if(device.mobile, tween(caller.scale, 0.33, 0.2); , tween(caller.scale, 0.5, 0.2); );
+
+    txtadd(img_name, get(caller.name), '_img');
+    txtadd(tag_name, get(caller.name), '_tag');
+    if(hotspot[get(img_name)],
+        tween(hotspot[get(img_name)].alpha, 0.0, 0.2);
+        tween(hotspot[get(tag_name)].alpha, 0.0, 0.2);
+    );
+</action>
+
+<!-- Plynulý prechod do novej scény po kliknutí -->
+<action name="hotspot2_onclick" scope="local">
+    if(caller.linkedscene,
+        hotspot2_onout();
+        tween(caller.scale, 0.1, 0.25);
+        tween(caller.alpha, 0.0, 0.25);
+        looktohotspot(get(caller.name), 65);
+        loadscene(get(caller.linkedscene), null, MERGE, BLEND(0.8));
+    );
+</action>

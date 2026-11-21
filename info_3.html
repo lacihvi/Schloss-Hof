@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sala Terrena - Zámok Schloss Hof</title>
+    <style>
+        html, body {
+            background: #141414 !important;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px;
+            color: #FFFFFF !important;
+            position: relative;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .lang-flag {
+            width: 30px;
+            height: 20px;
+            opacity: 0.4;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        /* ČISTÉ CSS PREPÍNANIE BEZ JAVASCRIPTU */
+        #lang-sk { display: block; }
+        #en { display: none; }
+        #flag-sk .lang-flag { opacity: 1; outline: 2px solid #E5A93C; }
+        
+        html:has(#en:target) #lang-sk { display: none; }
+        html:has(#en:target) #en { display: block; }
+        html:has(#en:target) #flag-sk .lang-flag { opacity: 0.4; outline: none; }
+        html:has(#en:target) #flag-en .lang-flag { opacity: 1; outline: 2px solid #E5A93C; }
+
+        .container {
+            max-width: 680px;
+            margin: 35px auto auto auto;
+            background: rgba(0, 0, 0, 0.4) !important;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            text-align: justify;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            color: #E5A93C !important;
+            text-align: center;
+            margin: 0 0 5px 0;
+        }
+        h2 {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        .highlight {
+            color: #E5A93C;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <a href="#" id="flag-sk" title="Slovensky">
+            <img src="img/64.png" alt="SK flag" class="lang-flag">
+        </a>
+        <a href="#en" id="flag-en" title="English">
+            <img src="img/65.png" alt="EN flag" class="lang-flag">
+        </a>
+    </div>
+
+    <div class="container">
+        
+        <!-- SLOVENSKÁ VERZIA -->
+        <div id="lang-sk">
+            <h1>Sala Terrena</h1>
+            <h2>Zámok Schloss Hof</h2>
+            
+            <p>Prepychová prízemná sieň známa ako <span class="highlight">Sala Terrena</span> tvorí pôsobivú architektonickú spojnicu medzi honosným interiérom paláca a priľahlými barokovými záhradami. Jej úlohou bolo symbolicky preniesť krásu okolitej prírody priamo do zámku a poskytnúť princovi Eugenovi Savojskému i jeho vzácnym hosťom osviežujúci chládok počas horúcich letných dní.</p>
+            
+            <p>Steny a klenutý strop zdobí mimoriadne bohatá <span class="highlight">baroková štukatúra a iluzívna maľba</span> s motívmi záhradných treláží, rastlinných úponkov a morských ulít, ktoré evokujú atmosféru rozprávkovej jaskyne – groty. Priestor dotvárajú jemné <span class="highlight">štukové reliéfy putti</span> a dramatické mytologické súsošie v čelnej nike, zatiaľ čo šachovnicová kamenná dlažba podčiarkuje vznešenosť celej sály.</p>
+            
+            <p>Hoci pôvodná výzdoba z 20. rokov 18. storočia v priebehu 19. storočia značne schátrala a musela byť odstránená, pri príležitosti veľkej výstavy o princovi Eugenovi v roku <span class="highlight">1986</span> bola sála na základe zachovaných fragmentov verne zrekonštruovaná. Dnes opäť žiari v niekdajšom lesku a slúži ako očarujúce dejisko slávnostných recepcií a koncertov.</p>
+        </div>
+
+        <!-- ANGLICKÁ VERZIA -->
+        <div id="en">
+            <h1>Sala Terrena</h1>
+            <h2>Schloss Hof Palace</h2>
+            
+            <p>The opulent ground-floor hall known as the <span class="highlight">Sala Terrena</span> serves as an impressive architectural bridge between the grand interior of the palace and the adjacent Baroque gardens. Its purpose was to symbolically bring the beauty of the surrounding nature directly indoors, offering Prince Eugene of Savoy and his distinguished guests a refreshing, cool retreat during hot summer days.</p>
+            
+            <p>The walls and vaulted ceiling are adorned with remarkably rich <span class="highlight">Baroque stucco work and illusionistic frescoes</span> depicting garden trellises, delicate foliage, and seashells, evoking the atmosphere of a fairytale grotto. The space is further enhanced by intricate <span class="highlight">stucco reliefs of putti</span> and a dramatic mythological sculpture group in the central niche, while the checkered stone floor underscores the hall's noble character.</p>
+            
+            <p>Although the original 1720s decoration fell into severe disrepair during the 19th century and had to be removed, the hall was faithfully reconstructed in <span class="highlight">1986</span> based on surviving fragments for a major exhibition dedicated to Prince Eugene. Today, it shines once again in its former splendor, serving as an enchanting venue for gala receptions and concerts.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
