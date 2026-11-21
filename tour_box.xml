@@ -220,6 +220,13 @@
 		<!-- place your scene hotspots here -->
 		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-177.114" atv="-0.252" linkedscene="scene_altanok"  />
 		<hotspot name="spot2" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-1.990" atv="-2.787" linkedscene="scene_fontana1"  />
+		
+		<layer name="INFO" style="skin_infopunkt|tooltip"
+			url="more-info.png" 
+			scale="0.4"
+			align="righttop" x="80" y="20"  tooltip="INFO"		
+			onhover="showtext(INFO, STYLE6);"		
+			onclick="frame_sidebar('info.html');" />	
 
 	</scene>
 
@@ -248,6 +255,13 @@
 		<!-- place your scene hotspots here -->
 		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-101.505" atv="2.718" linkedscene="scene_bager"  />
 		<hotspot name="spot2" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="81.931" atv="-0.181" linkedscene="scene_hof" />
+		
+		<layer name="INFO" style="skin_infopunkt|tooltip"
+			url="more-info.png" 
+			scale="0.4"
+			align="righttop" x="80" y="20"  tooltip="INFO"		
+			onhover="showtext(INFO, STYLE6);"		
+			onclick="frame_sidebar('info.html');" />	
 
 	</scene>
 
@@ -275,6 +289,13 @@
 		<!-- place your scene hotspots here -->
 		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="140.522" atv="6.443" linkedscene="scene_fontana2"  />
 		<hotspot name="spot2" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-42.083" atv="-1.998" linkedscene="scene_altanok"  />
+		
+		<layer name="INFO" style="skin_infopunkt|tooltip"
+			url="more-info.png" 
+			scale="0.4"
+			align="righttop" x="80" y="20"  tooltip="INFO"		
+			onhover="showtext(INFO, STYLE6);"		
+			onclick="frame_sidebar('info.html');" />	
 		
 
 	</scene>
@@ -307,6 +328,13 @@
 		<!-- place your scene hotspots here -->
 		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-78.151" atv="-8.221" linkedscene="scene_bager"  />
 		<hotspot name="spot2" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="91.113" atv="3.168" linkedscene="scene_fontana" />
+		
+		<layer name="INFO" style="skin_infopunkt|tooltip"
+			url="more-info.png" 
+			scale="0.4"
+			align="righttop" x="80" y="20"  tooltip="INFO"		
+			onhover="showtext(INFO, STYLE6);"		
+			onclick="frame_sidebar('info.html');" />	
 
 	</scene>
 	
@@ -341,6 +369,13 @@
 
 		<!-- place your scene hotspots here -->
 		<hotspot name="spot1" url="skin/vtourskin_hotspot_green.png" onover.addevent="autorotate.pause();" onout.addevent="autorotate.resume();"  style="skin_hotspotstyle2" ath="-139.623" atv="-0.827" linkedscene="scene_fontana2"  />
+		
+		<layer name="INFO" style="skin_infopunkt|tooltip"
+			url="more-info.png" 
+			scale="0.4"
+			align="righttop" x="80" y="20"  tooltip="INFO"		
+			onhover="showtext(INFO, STYLE6);"		
+			onclick="frame_sidebar('info.html');" />	
 
 	</scene>
 
